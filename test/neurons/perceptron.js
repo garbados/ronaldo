@@ -1,5 +1,12 @@
 var assert = require('assert');
-var Perceptron = require('../../lib/neurons/perceptron');
+
+var Perceptron;
+if (process.env.COVERAGE)
+  Perceptron = require('../../lib-cov/neurons/perceptron');
+else
+  Perceptron = require('../../lib/neurons/perceptron');
+
+
 
 describe('perceptron', function () {
   before(function () {
