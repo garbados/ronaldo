@@ -1,0 +1,36 @@
+{
+  "name": "ronaldo",
+  "version": "0.0.1",
+  "description": "An artificial neural network!",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jshint bin lib test && mocha -R spec test/*/*.js",
+    "cov": "jscoverage lib lib-cov && mocha -R html-cov test/*/*.js > coverage.html",
+    "doc": "jsdoc lib -d doc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/garbados/ronaldo"
+  },
+  "keywords": [
+    "neural",
+    "network",
+    "machine",
+    "learning"
+  ],
+  "author": "Diana Thayer <garbados@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/garbados/ronaldo/issues"
+  },
+  "homepage": "https://github.com/garbados/ronaldo",
+  "devDependencies": {
+    "jscoverage": "^0.5.9",
+    "jsdoc": "^3.3.0",
+    "jshint": "^2.7.0",
+    "mocha": "^2.2.5"
+  }
+}
