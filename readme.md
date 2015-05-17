@@ -7,3 +7,19 @@ Components for artificial neural networks, based on the [Neural Networks and Dee
 
 * [Documentation](http://garbados.github.io/ronaldo/)
 * [Coverage](http://garbados.github.io/ronaldo/coverage.html)
+* [Source](https://github.com/garbados/ronaldo)
+
+## TODO Install
+
+## TODO Usage
+
+## Test
+
+    git clone git@github.com:garbados/ronaldo.git
+    cd ronaldo
+    npm install    
+    npm test
+
+## License
+
+[ISC](http://opensource.org/licenses/ISC), yo.
