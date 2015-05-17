@@ -10,7 +10,7 @@
     "test": "jshint bin lib test && mocha -R spec test/*/*.js",
     "cov": "mkdir doc; jscoverage lib lib-cov && COVERAGE=true mocha -R html-cov test/*/*.js > doc/coverage.html",
     "doc": "jsdoc -r lib -d doc -R readme.md",
-    "todo": "grep TODO -r lib test bin",
+    "todo": "grep TODO -r lib test bin readme.md",
     "deploy": "npm run doc && npm run cov && ./bin/deploy-ghpages.sh",
     "coveralls": "COVERAGE=true mocha -R mocha-lcov-reporter test/*/*.js | coveralls"
   },
