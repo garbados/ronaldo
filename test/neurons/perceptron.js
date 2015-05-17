@@ -6,8 +6,6 @@ if (process.env.COVERAGE)
 else
   Perceptron = require('../../lib/neurons/perceptron');
 
-
-
 describe('perceptron', function () {
   before(function () {
     this.perceptron = new Perceptron([0, 2, 5], -2);
