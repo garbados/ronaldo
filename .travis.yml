@@ -1,4 +1,10 @@
 language: node_js
 node_js:
-- '0.11'
-- '0.10'
+  - '0.11'
+  - '0.10'
+env:
+  global:
+    - GH_REF: github.com/garbados/ronaldo.git
+    - secure: "r6E4TBFW/sjU7NpTaetgzj+PF4XfDkLdDwSbreLuZN6uF8WYJ8Sa7MGVLJBtqdfFcHuoGDuNoqnLzBX9qM+/Qx+ur4vnCb9GfGyMi9dtt2ZFM+edSVdCjJ4XnWhlgcUMmdON/Ji9GVpWAz2pDAZtcmzcyu7imKLYJAPfWLNS/0g9PTrE3AlbLawNsIpJdYGG1uxr3LoPh7Fz07jTYAfcql0PFrt1TXwCOclukkn5bnFn+ySQvmc3twN1Tr3uz5RhndrR+HpR9wlA2o02NNDl8Obs5U2FReInMDMeIOSnnKPG/6vqVXZyYRv75PZqaiozCM3SIrBLzUPbaDtASsppl6/jj/FBc5HH1s/NZJAWbrv5NijGM9XDE1Re69vn42xXojEobB3MJwOaUm3sQumx3Pb7RFZ6AIPCau4W8cVkcbkYa/ZyVKboK/YINVwQHmr66U69tPrVvBwmwg94O/3ssSlz0zgf65GGb95EzKxqyDsF0CStucRkmWEQkcHvoIGZ/S8/+MczJ8l6U/ajwd6JjRQpgz/Wdd+MMyYOoiNzAXUXFQazA6NksPXxnOUI2pwjzu1Lh1jiZqyUcZ6cA/lgobve+B36/aI5EbakMl/6FDaVNubrLwrJcONjCh0Oxx76N7BoqVY3kl6nnIoQ6gFvQ5jeIUDSIcGMHJNReFPeOeY="
+after_success:
+  - npm run deploy
