@@ -33,10 +33,7 @@ describe('n-layer network', function () {
     var deltas = this.network._calculate_deltas(outputs, this.target);
     deltas.forEach(function (layer_delta, i) {
       layer_delta.forEach(function (neuron_delta, j) {
-        // assert every delta is within a sufferable range
-        console.log(i, j, neuron_delta);
-        assert(neuron_delta <= 1);
-        assert(neuron_delta >= 0);
+        assert.equal(typeof neuron_delta, 'number');
       });
     });
   });
