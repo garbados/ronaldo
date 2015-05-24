@@ -39,6 +39,7 @@
     "mocha-lcov-reporter": "0.0.2"
   },
   "dependencies": {
+    "mathjs": "^1.6.0",
     "underscore": "^1.8.3"
   }
 }
