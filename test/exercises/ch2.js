@@ -43,6 +43,7 @@ describe('exercises - chapter 2', function () {
           return a + b;
         }, 0);
       });
+      console.log(this.target, this.untrained_output, this.trained_output);
       assert(differences[0] > differences[1]);
     });
   });
