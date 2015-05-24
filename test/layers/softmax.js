@@ -17,6 +17,7 @@ describe('softmax layer', function () {
     var sum = outputs.reduce(function (a, b) {
       return a + b;
     });
-    assert.equal(sum, 1);
+    // handle floating point precision problems
+    assert(sum - 1 < Math.pow(1, -10));
   });
 });
