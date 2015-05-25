@@ -4,10 +4,13 @@ var assert = require('assert');
 var lib = require('../lib');
 
 var TRAINING_DATA = mnist.training(10);
-var TESTING_DATA = mnist.testing(10);
+var TESTING_DATA = mnist.testing(100);
 
 function flatten_image (matrix) {
-  return _.flatten(matrix);
+  return _.flatten(matrix).map(function (i) {
+    // return greyscale values between 0 and 1
+    return i / 255;
+  });
 }
 
 function label_to_bitmap (label) {
@@ -29,18 +32,17 @@ function bitmap_error (bitmap, label) {
 describe('classifying mnist digits', function () {
   describe('networks with 1 hidden layer', function () {
     before(function () {
-      this.network = new lib.networks.Network([28 * 28, 15, 10]);
+      this.network = new lib.networks.Network([28 * 28, 30, 10]);
     });
 
-    it('should train with the dataset', function () {
+    it.only('should train with the dataset to recognize inputs it has trained on', function () {
       this.timeout(0);
       var flat_images = TRAINING_DATA.images.values.map(flatten_image);
       var binary_labels = TRAINING_DATA.labels.values.map(label_to_bitmap);
-      var data = _.zip(flat_images, binary_labels);
-      // accurately convert integers to bit maps
-      assert.equal(binary_labels[0][TRAINING_DATA.labels.values[0]], 1);
-      // trains the network without throwing errors
-      this.network.train(data);
+      this.network.train(_.zip(flat_images, binary_labels), 30);
+      console.log(flat_images[0]);
+      var output = this.network.process(flat_images[0]);
+      console.log(output, binary_labels[0]);
     });
 
     it('should predict labels for the testing data', function () {
