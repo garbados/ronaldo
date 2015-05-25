@@ -7,12 +7,13 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jshint bin lib test && mocha -R spec test/*/*.js",
-    "cov": "mkdir doc; jscoverage lib lib-cov && COVERAGE=true mocha -R html-cov test/*/*.js > doc/coverage.html",
+    "test": "jshint bin lib test && mocha --recursive -R spec test",
+    "mnist": "mocha -R spec test_mnist",
+    "cov": "mkdir doc; jscoverage lib lib-cov && COVERAGE=true mocha --recursive -R html-cov test > doc/coverage.html",
     "doc": "jsdoc -r lib -d doc -R readme.md",
     "todo": "grep TODO -r lib test bin readme.md",
     "deploy": "npm run doc && npm run cov && ./bin/deploy-ghpages.sh",
-    "coveralls": "COVERAGE=true mocha -R mocha-lcov-reporter test/*/*.js | coveralls"
+    "coveralls": "COVERAGE=true mocha --recursive -R mocha-lcov-reporter test | coveralls"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "jscoverage": "^0.5.9",
     "jsdoc": "^3.3.0",
     "jshint": "^2.7.0",
+    "mnist-data": "^1.2.5",
     "mocha": "^2.2.5",
     "mocha-lcov-reporter": "0.0.2"
   },
