@@ -36,14 +36,15 @@ describe('exercises - chapter 2', function () {
 
     it('(3) training should modify weights to more correctly predict a given output', function () {
       var self = this;
-      var differences = [this.untrained_output, this.trained_output].map(function (output) {
+      var errors = [this.untrained_output, this.trained_output].map(function (output) {
         return output.map(function (bit, i) {
           return Math.abs(self.target[i] - bit);
         }).reduce(function (a, b) {
           return a + b;
         }, 0);
       });
-      assert(differences[0] > differences[1]);
+      console.log(this.target, this.untrained_output, this.trained_output);
+      assert(errors[0] > errors[1]);
     });
   });
 });
