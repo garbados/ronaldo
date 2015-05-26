@@ -28,24 +28,25 @@ function bitmap_error (bitmap, label) {
 } 
 
 describe('classifying mnist digits', function () {
-  describe('networks with 1 hidden layer', function () {
+  describe.only('networks with 1 hidden layer', function () {
     before(function () {
       this.network = new lib.networks.Network([28 * 28, 28 * 14, 10]);
     });
 
-    it.only('should train with the dataset to recognize inputs it has trained on', function () {
+    it('should train with the dataset to recognize inputs it has trained on', function () {
       this.timeout(0);
       var training_data = mnist.training(10);
       var flat_images = training_data.images.values.map(flatten_image);
       var label_bitmaps = training_data.labels.values.map(label_to_bitmap);
       var data = _.zip(flat_images, label_bitmaps);
-      this.network.train(data, 10);
+      this.network.train(data);
       var output = this.network.process(flat_images[0]);
       // TODO make it accurate
-      // assert.equal(bitmap_to_label(output), training_data.labels.values[0]);
+      assert.equal(bitmap_to_label(output), training_data.labels.values[0]);
     });
   });
 
+  // used as a control group
   describe('harthur/brain', function () {
     before(function () {
       this.network = new brain.NeuralNetwork();
