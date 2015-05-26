@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "jshint bin lib test && mocha --recursive -R spec test",
-    "mnist": "mocha -R spec test_mnist",
+    "mnist": "jshint test_mnist && mocha -R spec test_mnist",
     "cov": "mkdir doc; jscoverage lib lib-cov && COVERAGE=true mocha --recursive -R html-cov test > doc/coverage.html",
     "doc": "jsdoc -r lib -d doc -R readme.md",
     "todo": "grep TODO -r lib test bin readme.md",
@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/garbados/ronaldo",
   "devDependencies": {
+    "brain": "^0.7.0",
     "coveralls": "^2.11.2",
     "jscoverage": "^0.5.9",
     "jsdoc": "^3.3.0",
