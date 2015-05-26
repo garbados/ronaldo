@@ -41,6 +41,7 @@ describe('classifying mnist digits', function () {
       var data = _.zip(flat_images, label_bitmaps);
       this.network.train(data, 10);
       var output = this.network.process(flat_images[0]);
+      // TODO make it accurate
       // assert.equal(bitmap_to_label(output), training_data.labels.values[0]);
     });
   });
