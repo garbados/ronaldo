@@ -30,7 +30,8 @@ describe('n-layer network', function () {
 
   it('should calculate deltas from an array of layer outputs and a desired output', function () {
     var outputs = this.network._feedforward(this.input);
-    var deltas = this.network._calculate_deltas(outputs, this.target);
+    var results = this.network._calculate_deltas(this.input, outputs, this.target);
+    var deltas = results[1];
     deltas.forEach(function (layer_delta, i) {
       layer_delta.forEach(function (neuron_delta, j) {
         assert.equal(typeof neuron_delta, 'number');
