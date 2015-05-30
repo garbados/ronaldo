@@ -28,21 +28,26 @@ function bitmap_error (bitmap, label) {
 } 
 
 describe('classifying mnist digits', function () {
-  describe.only('networks with 1 hidden layer', function () {
+  this.timeout(0);
+
+  describe('networks with 1 hidden layer', function () {
     before(function () {
-      this.network = new lib.networks.Network([28 * 28, 28 * 14, 10]);
+      this.network = new lib.networks.Network([28 * 28, 30, 10]);
+      this.training_data = mnist.training(100);
+      this.flat_images = this.training_data.images.values.map(flatten_image);
+      this.label_bitmaps = this.training_data.labels.values.map(label_to_bitmap);
+      // train network
+      var data = _.zip(this.flat_images, this.label_bitmaps);
+      this.network.train(data, {
+        epochs: 10
+      });
     });
 
     it('should train with the dataset to recognize inputs it has trained on', function () {
-      this.timeout(0);
-      var training_data = mnist.training(10);
-      var flat_images = training_data.images.values.map(flatten_image);
-      var label_bitmaps = training_data.labels.values.map(label_to_bitmap);
-      var data = _.zip(flat_images, label_bitmaps);
-      this.network.train(data);
-      var output = this.network.process(flat_images[0]);
-      // TODO make it accurate
-      assert.equal(bitmap_to_label(output), training_data.labels.values[0]);
+      var output = this.network.process(this.flat_images[0]);
+      var output_label = bitmap_to_label(output);
+      console.log(output, this.training_data.labels.values[0]);
+      assert.equal(output_label, this.training_data.labels.values[0]);
     });
   });
 
@@ -50,18 +55,20 @@ describe('classifying mnist digits', function () {
   describe('harthur/brain', function () {
     before(function () {
       this.network = new brain.NeuralNetwork();
-    });
-
-    it('should train with the dataset to recognize inputs it has trained on', function () {
-      var training_data = mnist.training(10);
-      var flat_images = training_data.images.values.map(flatten_image);
-      var label_bitmaps = training_data.labels.values.map(label_to_bitmap);
-      var data = _.zip(flat_images, label_bitmaps).map(function (d) {
+      this.training_data = mnist.training(10);
+      this.flat_images = this.training_data.images.values.map(flatten_image);
+      this.label_bitmaps = this.training_data.labels.values.map(label_to_bitmap);
+      // train network
+      var data = _.zip(this.flat_images, this.label_bitmaps).map(function (d) {
         return { input: d[0], output: d[1] };
       });
       this.network.train(data);
-      var output = this.network.run(flat_images[0]);
-      assert.equal(bitmap_to_label(output), bitmap_to_label(label_bitmaps[0]));
+    });
+
+    it('should train with the dataset to recognize inputs it has trained on', function () {
+      var output = this.network.run(this.flat_images[0]);
+      var output_label = bitmap_to_label(output);
+      assert.equal(output_label, this.training_data.labels.values[0]);
     });
   });
 });
